@@ -2,10 +2,16 @@ from flask import Flask, request
 import torch
 from PIL import Image
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 net = torch.jit.load('my_model.zip')
+
+@app.route('/')
+def hello():
+    return "Hello World!"
 
 
 @app.route("/predict", methods=['POST'])
